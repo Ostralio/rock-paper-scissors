@@ -19,6 +19,8 @@ model.fit(train_images, train_labels, epochs=5)
 
 test_loss, test_acc = model.evaluate(test_images, test_labels)
 
+print("Done learning")
+
 # # Training machine to identify linear pattern
 # model = keras.Sequential([keras.layers.Dense(units=1, input_shape=[1])])
 # model.compile(optimizer='sgd', loss='mean_squared_error')
