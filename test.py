@@ -2,6 +2,8 @@ import tensorflow as tf
 import numpy as np
 from tensorflow import keras
 
+#HYELLLO!
+
 fashion_mnist = keras.datasets.fashion_mnist
 
 # Images are images, lables are a number corresponding to what the image is.
