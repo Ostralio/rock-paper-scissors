@@ -11,7 +11,7 @@ import sys
 #     return gray
 
 fileName = sys.argv[1]
-imgPath = 'images/' + fileName + '.JPG'
+imgPath = 'images/' + fileName + '.jpg'
 FaceCascPath = 'haarcascade_frontalface_default.xml'
 EyeCascPath = 'haarcascade_eye.xml'
 
