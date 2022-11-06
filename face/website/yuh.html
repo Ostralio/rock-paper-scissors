@@ -4,55 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="hello.css">
+    <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <title>Display Webcam</title>
-    <style>
-        h1 {
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            color: black;
-        }
-        body {
-            margin: 50px;
-        }
-
-        #container {
-            margin: auto;
-            width: 510px;
-            height: 385px;
-            background-color: gray solid;
-            border: 10px;
-        }
-
-        #videoElement {
-            width: 500px;
-            height: 375px;
-            background-color: olive;
-        }
-    </style>
 </head>
-<body style="background-color: lightgrey";>
-    <h1><center>Webcam</center></h1>
+<body style="background-color: #FFC0CB";>
     <div id="container">
-        <video autoplay="true" id="videoElement">
-
-        </video>
+        <video id="webcam" autoplay="true"></video>
+        <img class="rockButton" id="rock" src="https://i.imgur.com/TmifY43.png">
+        <button class="paperButton" onclick="paper()">Paper</button>
+        <button onclick="scissors()">Scissors</button>
     </div>
-
-    <script>
-    let video = document.querySelector('#videoElement');
-
-    if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({video: true})
-        .then(function (stream) {
-            video.srcObject = stream;
-        })
-        .catch (function (error) {
-            console.log('error lol')
-        })
-    }
-    else {
-        console.log('getUserMedia not supported!');
-    }
-    </script>
-
+    <canvas id="canvas" class="canvas"></canvas>
 </body>
+<script src="app.js"></script>
 </html>
