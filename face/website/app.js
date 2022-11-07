@@ -37,5 +37,10 @@ function downloadURI(uri, name) {
 function takePic(){
     document.getElementById("canvas").style.display = "block"
     let picture = webcam.snap();
-    downloadURI(picture, "pic.png")
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const arr = new Uint8ClampedArray(187500 * 4);
+    let imageData = ctx.getImageData(0 , 0, 375, 500);
+    console.log(imageData.data);
+    // downloadURI(picture, "pic.png")
 }
