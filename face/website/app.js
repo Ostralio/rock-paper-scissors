@@ -17,15 +17,15 @@ document.getElementById("rock").addEventListener("click", () => {
     takePic();
 })
 
-function paper(){
-    choice = "paper"
-    takePic()
-}
+var paper = document.getElementById("paper")
+document.getElementById("paper").addEventListener("click", () => {
+    takePic();
+})
 
-function scissors(){
-    choice = "scissors"
-    takePic()
-}
+var scissors = document.getElementById("scissors")
+document.getElementById("scissors").addEventListener("click", () => {
+    takePic();
+})
 
 function downloadURI(uri, name) {
     var link = document.createElement("a");

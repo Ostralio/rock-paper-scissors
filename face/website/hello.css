@@ -32,17 +32,21 @@ button{
 }
 
 .rockButton {
-    height: 50%;
+    height: 55%;
     justify-self: center;
 }
 
 .paperButton {
-    background-color: beige;
-    width: 50%;
-    height: 40px;
+    height: 65%;
+    justify-self: center;
+}
+
+.scissorsButton {
+    height: 60%;
     justify-self: center;
 }
 
 .canvas{
     display: none;
+    justify-self: center;
 }
