@@ -34,13 +34,29 @@ function downloadURI(uri, name) {
     link.click();
 }
 
+function updateData(id, data) {
+    document.getElementById(id).innerHTML = data
+}
+
 function takePic(){
     document.getElementById("canvas").style.display = "block"
     let picture = webcam.snap();
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    const arr = new Uint8ClampedArray(187500 * 4);
-    let imageData = ctx.getImageData(0 , 0, 375, 500);
-    console.log(imageData.data);
+    let imageData = ctx.getImageData(0 , 0, 500, 375);
+    rgbArray = []
+    dataArray = imageData.data
+    for (var i = 0; i < dataArray.length; i+=4) {
+        rgbArray.push([dataArray[i], dataArray[i+1], dataArray[i+2]])
+    }
+    updateData("img_data", imageData.data)
+    var normalArray = Array.prototype.slice.call(imageData.data);
+    var blob1 = new Blob([JSON.stringify(rgbArray)], { type: "text/plain;charset=utf-8" });
+    var link = document.createElement("a"); // Or maybe get it from the current document
+    var blobUrl = URL.createObjectURL(blob1);
+    link.href = blobUrl;
+    link.download = "imgData.txt";
+    link.innerHTML = "downloadRGBarray";
+    document.body.appendChild(link); // Or append it whereever you want
     // downloadURI(picture, "pic.png")
 }
