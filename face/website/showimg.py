@@ -6,8 +6,9 @@ with open('face\website\imgdata.json') as file:
     data = json.load(file)
 file.close()
 
-im = Image.fromarray(numpy.array(data))
-im.show()
+def display_img(arr):
+    im = Image.fromarray(numpy.array(arr))
+    im.show()
 
 
 

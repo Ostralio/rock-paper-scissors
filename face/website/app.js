@@ -55,13 +55,14 @@ function takePic(){
     }
     updateData("img_data", imageData.data)
   
-
-    var blob1 = new Blob([JSON.stringify(grayscale)], { type: "text/plain;charset=utf-8" });
+    var grayscaleBlob = new Blob([JSON.stringify(grayscale)], { type: "text/plain;charset=utf-8" });
     var link = document.createElement("a"); // Or maybe get it from the current document
-    var blobUrl = URL.createObjectURL(blob1);
+    var blobUrl = URL.createObjectURL(grayscaleBlob);
     link.href = blobUrl;
     link.download = "imgGS.txt";
     link.innerHTML = "downloadGSarray";
+
+    saveAs(grayscaleBlob, "imgdata.txt")
     document.body.appendChild(link); // Or append it whereever you want
     // downloadURI(picture, "pic.png")
 }
