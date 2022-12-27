@@ -14,17 +14,17 @@ webcam.start()
 
 var rock = document.getElementById("rock")
 document.getElementById("rock").addEventListener("click", () => {
-    takePic();
+    takePic(0);
 })
 
 var paper = document.getElementById("paper")
 document.getElementById("paper").addEventListener("click", () => {
-    takePic();
+    takePic(1);
 })
 
 var scissors = document.getElementById("scissors")
 document.getElementById("scissors").addEventListener("click", () => {
-    takePic();
+    takePic(2);
 })
 
 function downloadURI(uri, name) {
@@ -63,23 +63,15 @@ function send_data(url, arr) {
     xhr.send(arr)
 }
 
-function takePic(){
+function takePic(choice){
     document.getElementById("canvas").style.display = "block"
     let picture = webcam.snap();
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     let imageData = ctx.getImageData(0 , 0, 500, 375);
-    grayscale = grayscale_array(imageData.data);
+    output = {'img': grayscale_array(imageData.data), 'choice': choice};
     
-    var grayscaleBlob = new Blob([JSON.stringify(grayscale)], { type: "text/plain;charset=utf-8" });
+    var outputBlob = new Blob([JSON.stringify(output)], { type: "text/plain;charset=utf-8" });
 
-    send_data('http://127.0.0.1:5000/face_data', grayscaleBlob);
-    // var link = document.createElement("a"); // Or maybe get it from the current document
-    // var blobUrl = URL.createObjectURL(grayscaleBlob);
-    // link.href = blobUrl;
-    // link.download = "imgGS.txt";
-    // link.innerHTML = "downloadGSarray";
-
-    // saveAs(grayscaleBlob, "imgdata.txt");
-    // document.body.appendChild(link);
+    send_data('http://127.0.0.1:5000/face_data', outputBlob);
 }
