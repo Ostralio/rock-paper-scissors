@@ -57,8 +57,7 @@ function send_data(url, arr) {
 
     xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
-        console.log(xhr.status);
-        console.log(xhr.responseText);
+        console.log(xhr.responseText); // responseText will be return from API call
     }};
 
     xhr.send(arr)
