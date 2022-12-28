@@ -17,7 +17,7 @@ def test():
         return 'ok and???'
     elif request.method == "POST":
         input = request.get_json(force=True)
-        temp = rpst.find_face(np.array(input['img']), input['choice'])
+        temp = rpst.save2traindata(rpst.find_face(np.array(input['img'])), input['choice'])
         if temp != 0:
             MLarray = np.asarray(cv2.imread(temp))
             # pump face thru neural net to get actual response

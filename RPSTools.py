@@ -32,7 +32,7 @@ def save2traindata(face_obj, choice):
 
 # Uses haarcascade to find largest face within image, crops img to just be face then regrayscales.
 # Pushes data through save2traindata to return img path
-def find_face(arr, choice):
+def find_face(arr):
     face_cascade = cv2.CascadeClassifier(FaceCascPath)
     img = cv2.imwrite('temp.png', arr)
     img = cv2.imread('temp.png')
@@ -45,4 +45,4 @@ def find_face(arr, choice):
         sorted(faces, key=(lambda x: x[2]*x[3]))
         x, y, h, w = faces[0]
         crop_img = cv2.cvtColor(img[y:y+h, x:x+w], cv2.COLOR_BGR2GRAY)
-        return save2traindata(crop_img, choice)
+        return crop_img
