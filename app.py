@@ -5,11 +5,13 @@ import cv2
 import numpy as np
 import RPSTools as rpst
 import os
+import rpsModel as rps
 
 # python -m flask run
 
 app = Flask(__name__)
 CORS(app)
+model = rps.model()
 
 @app.route('/face_data', methods=['GET', 'POST'])
 def test():
@@ -18,13 +20,15 @@ def test():
     elif request.method == "POST":
         input = request.get_json(force=True)
         temp = rpst.save2traindata(rpst.find_face(np.array(input['img'])), input['choice'])
+        
         if temp != 0:
             MLarray = np.asarray(cv2.imread(temp))
-            # pump face thru neural net to get actual response
-        return 'Yop'
+            return model.get_prediction(MLarray)
+        else:
+            return 'error'
+    
     else:
-        print('Error finding face')
-        return 'Error'
+        return 'tf is that request brah'
 
 @app.route("/")
 def home():
