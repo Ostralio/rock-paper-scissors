@@ -6,6 +6,12 @@ body {
     margin: 50px;
 }
 
+.container1{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+}
+
 #container {
     margin: 0px;
     width: 100%;
@@ -53,6 +59,14 @@ button{
     height: 60%;
     justify-self: center;
 }
+
+#predictionDisplay{
+    justify-self: center;
+}
+
+/* .hide{
+    display: none;
+} */
 
 .animation {
     justify-self: center;

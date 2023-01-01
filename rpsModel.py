@@ -10,6 +10,8 @@ import json
 
 # setting up arrays of training data and testing data and stuff
 
+resultKey = {0 : "rock", 1 : "paper", 2 : "scissors"}
+
 class model:
     def __init__(self):
         self.model = keras.Sequential([
@@ -34,7 +36,7 @@ class model:
         train_labels = []
         checkpoint_path = "model/cp.ckpt"
         cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_weights_only=True, verbose=1)
-        
+
         for img_path in self.train_paths:
             img = Image.open('FaceTrainData/images/' + img_path)
             train_images.append(np.asarray(img))
@@ -44,22 +46,21 @@ class model:
             data = json.load(file)
         for label in data.values():
             train_labels.append(label)
-        train_labels_np = np.asarray(train_labels.values())
+        train_labels_np = np.asarray(train_labels)
 
         self.model.compile(optimizer=tf.optimizers.Adam(), loss='sparse_categorical_crossentropy', metrics='accuracy')
         self.model.fit(train_images_np, train_labels_np, epochs=5, callbacks=[cp_callback])
     
-    def get_prediction(self, img):
-        prediction = model.predict(np.array([img]))
-        return prediction
-
+    def get_prediction(self, arr):
+        print(arr.shape)
+        pred_arr = self.model.predict(np.array([arr]))
+        prediction = resultKey[np.argmax(pred_arr[0], axis=0)]
+        return (prediction, pred_arr)
 
 # train_images = []
 # train_labels = []
 # test_images = []
 # test_labels = []
-
-
 
 # train_paths = os.listdir('FaceTrainData/images')
 # test_paths = os.listdir('FaceTestData/images')

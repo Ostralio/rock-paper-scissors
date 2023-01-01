@@ -49,6 +49,12 @@ function grayscale_array(arr) {
     return grayscale
 }
 
+function displayResult(pred){
+    displayText = "fr you gotta be a " + pred + " kinda guy/gal"
+    console.log(displayText)
+    document.getElementById("predictionDisplay").innerHTML = displayText; 
+}
+
 function send_data(url, arr) {
     let xhr = new XMLHttpRequest;
     xhr.open("POST", url);
@@ -57,10 +63,11 @@ function send_data(url, arr) {
 
     xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
-        console.log(xhr.responseText); // responseText will be return from API call
+        displayResult(xhr.responseText);
     }};
-
-    xhr.send(arr)
+    
+    xhr.send(arr);
+    return xhr.responseText;
 }
 
 function takePic(choice){
@@ -72,6 +79,16 @@ function takePic(choice){
     output = {'img': grayscale_array(imageData.data), 'choice': choice};
     
     var outputBlob = new Blob([JSON.stringify(output)], { type: "text/plain;charset=utf-8" });
-
-    send_data('http://127.0.0.1:5000/face_data', outputBlob);
+    pred = send_data('http://127.0.0.1:5000/face_data', outputBlob);
+    // document.getElementsByClassName("hide").classList.remove("hide");
 }
+
+// let myPromise = new Promise(function(pred) {
+//     pred()
+// });
+
+// myPromise.then(
+//     displayText = "fr you gotta be a " + pred + " kinda guy/gal",
+//     console.log(displayText),
+//     document.getElementById("predictionDisplay").innerHTML = displayText,
+// );
