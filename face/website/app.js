@@ -71,7 +71,6 @@ function send_data(url, arr) {
 }
 
 function takePic(choice){
-    document.getElementById("canvas").style.display = "block"
     let picture = webcam.snap();
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
