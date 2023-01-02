@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for
+from flask import Flask, request, render_template, url_for
 from flask_cors import CORS
 from PIL import Image
 import cv2
@@ -42,4 +42,4 @@ def train():
 
 @app.route("/")
 def home():
-    return "deez"
+    return render_template("yuh.html")
