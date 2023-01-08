@@ -1,6 +1,7 @@
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, send_from_directory
 from flask_cors import CORS
 from PIL import Image
+import os
 import cv2
 import numpy as np
 import RPSTools as rpst
@@ -37,6 +38,10 @@ def train():
         model.train()
         return "yubba"
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/")
 def home():
