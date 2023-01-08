@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
-from keras import layers, Sequential
+from keras import layers, Sequential, backend
 import cv2
 from PIL import Image, ImageOps
 import os
@@ -12,17 +12,24 @@ import json
 
 resultKey = {0 : "rock", 1 : "paper", 2 : "scissors"}
 
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+  try:
+    tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=1024)])
+  except RuntimeError as e:
+    print(e)
+
 class model:
     def __init__(self):
         self.model = keras.Sequential([
         keras.layers.Conv2D(32, (3, 3), activation="relu", input_shape=(50, 50, 1)),
         keras.layers.MaxPooling2D((2, 2), strides=2),
         # second convolution layer
-        keras.layers.Conv2D(64, (3, 3), activation="relu"),
-        keras.layers.MaxPooling2D((2, 2), strides=2),
+        # keras.layers.Conv2D(64, (3, 3), activation="relu"),
+        # keras.layers.MaxPooling2D((2, 2), strides=2),
 
-        keras.layers.Conv2D(128, (3, 3), activation="relu"),
-        keras.layers.MaxPooling2D((2, 2), strides=2),
+        # keras.layers.Conv2D(128, (3, 3), activation="relu"),
+        # keras.layers.MaxPooling2D((2, 2), strides=2),
         # fully connected classification
         # single vector
         keras.layers.Flatten(),

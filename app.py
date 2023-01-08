@@ -4,7 +4,6 @@ from PIL import Image
 import cv2
 import numpy as np
 import RPSTools as rpst
-import os
 import rpsModel as rps
 
 # python -m flask run
@@ -21,7 +20,6 @@ def predict():
         input = request.get_json(force=True)
         temp = rpst.save2traindata(rpst.find_face(np.array(input['img'])), input['choice'])
         print(temp)
-        
         if temp != 0:
             MLarray = np.asarray(cv2.imread(temp, 0))
             predictionTuple = model.get_prediction(MLarray)
@@ -43,3 +41,6 @@ def train():
 @app.route("/")
 def home():
     return render_template("yuh.html")
+
+if __name__ == "__main__":
+	app.run()
