@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import os
 import json
+from datetime import datetime
 
 FaceCascPath = 'haarcascade_frontalface_default.xml'
 
@@ -46,3 +47,10 @@ def find_face(arr):
         x, y, h, w = faces[0]
         crop_img = cv2.cvtColor(img[y:y+h, x:x+w], cv2.COLOR_BGR2GRAY)
         return crop_img
+
+def update_stats(choice, prediction):
+    stats = {'choice': choice, 'pred': prediction, 'timestamp': datetime.now()}
+    pass
+
+def fetch_stats():
+    pass
